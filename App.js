@@ -8,27 +8,45 @@ export default function App() {
 	console.log(numbers);
 	const [calculation, setCalculation] = useState(0);
 	const [calculated, setCalculated] = useState();
-	const calc = numbers.join(" ");
 	useEffect(() => {
-		setCalculation(calc);
+		setCalculation(numbers.join(""));
 	}, [numbers]);
 
+	const deleteNum = () => {
+		const pop = numbers.slice(0, -1);
+		setNumbers(pop);
+	};
 	const calculate = () => {
-		setCalculated(eval(calc));
+		if (
+			numbers.slice(-1).pop() === "+" ||
+			numbers.slice(-1).pop() === "-" ||
+			numbers.slice(-1).pop() === "*" ||
+			numbers.slice(-1).pop() === "/" ||
+			numbers.slice(-1).pop() === "("
+		) {
+			alert("Invalid Format");
+		} else {
+			setCalculated(eval(numbers.join("")));
+		}
+	};
+
+	const reset = () => {
+		setNumbers([]);
+		setCalculated();
 	};
 	return (
-		<View style={{ backgroundColor: "#243441", minHeight: "100vh" }}>
-			<View style={{ margin: "9px", flex: 1, justifyContent: "center" }}>
+		<View style={{ backgroundColor: "#243441", flex: 1 }}>
+			<View style={{ margin: 9, flex: 1, justifyContent: "center" }}>
 				<View
 					style={{
-						padding: "21px",
-						height: "200px",
+						padding: 21,
+						height: 200,
 					}}>
 					<Text
 						style={{
 							color: "white",
 							fontWeight: "bold",
-							fontSize: "25px",
+							fontSize: 25,
 							textAlign: "right",
 						}}>
 						{calculation}
@@ -37,7 +55,7 @@ export default function App() {
 						style={{
 							color: "white",
 							fontWeight: "bold",
-							fontSize: "75px",
+							fontSize: 75,
 							textAlign: "right",
 						}}>
 						{calculated}
@@ -45,22 +63,43 @@ export default function App() {
 				</View>
 				<View>
 					<Row size={12}>
+						<Col sm={6}>
+							<ButtonStyle
+								number={"("}
+								numbers={numbers}
+								setNumbers={setNumbers}
+							/>
+						</Col>
+						<Col sm={6}>
+							<ButtonStyle
+								number={")"}
+								numbers={numbers}
+								setNumbers={setNumbers}
+							/>
+						</Col>
 						<Col sm={3}>
-							<TouchableOpacity onPress={() => setNumbers([])}>
+							<TouchableOpacity onPress={() => reset()}>
 								<View
 									style={{
 										backgroundColor: "#243441",
-										borderRadius: "21px",
+										borderRadius: 21,
 										alignItems: "center",
 										justifyContent: "center",
-										height: "75px",
-										margin: "7px",
-										boxShadow:
-											"rgb(0 0 0 / 7%) 0px 1px 2px, rgb(0 0 0 / 7%) 0px 2px 4px, rgb(0 0 0 / 7%) 0px 4px 8px, rgb(0 0 0 / 7%) 0px 8px 16px, rgb(0 0 0 / 7%) 0px 16px 32px, rgb(0 0 0 / 7%) 0px 32px 64px",
+										height: 75,
+										margin: 7,
+										shadowColor: "#000",
+										shadowOffset: {
+											width: 0,
+											height: 12,
+										},
+										shadowOpacity: 0.58,
+										shadowRadius: 16.0,
+
+										elevation: 24,
 									}}>
 									<Text
 										style={{
-											fontSize: "31px",
+											fontSize: 31,
 											color: "#ED802E",
 										}}>
 										C
@@ -69,23 +108,46 @@ export default function App() {
 							</TouchableOpacity>
 						</Col>
 						<Col sm={3}>
-							<ButtonStyle
-								number={"("}
-								numbers={numbers}
-								setNumbers={setNumbers}
-							/>
-						</Col>
-						<Col sm={3}>
-							<ButtonStyle
-								number={")"}
-								numbers={numbers}
-								setNumbers={setNumbers}
-							/>
+							<TouchableOpacity onPress={() => deleteNum()}>
+								<View
+									style={{
+										backgroundColor: "#243441",
+										borderRadius: 21,
+										alignItems: "center",
+										justifyContent: "center",
+										height: 75,
+										margin: 7,
+										shadowColor: "#000",
+										shadowOffset: {
+											width: 0,
+											height: 12,
+										},
+										shadowOpacity: 0.58,
+										shadowRadius: 16.0,
+
+										elevation: 24,
+									}}>
+									<Text
+										style={{
+											fontSize: 31,
+											color: "#ED802E",
+										}}>
+										{"<<"}
+									</Text>
+								</View>
+							</TouchableOpacity>
 						</Col>
 
 						<Col sm={3}>
 							<ButtonStyle
 								number={"/"}
+								numbers={numbers}
+								setNumbers={setNumbers}
+							/>
+						</Col>
+						<Col sm={3}>
+							<ButtonStyle
+								number={"*"}
 								numbers={numbers}
 								setNumbers={setNumbers}
 							/>
@@ -114,7 +176,7 @@ export default function App() {
 						</Col>
 						<Col sm={3}>
 							<ButtonStyle
-								number={"*"}
+								number={"+"}
 								numbers={numbers}
 								setNumbers={setNumbers}
 							/>
@@ -171,7 +233,7 @@ export default function App() {
 						</Col>
 						<Col sm={3}>
 							<ButtonStyle
-								number={"+"}
+								number={"."}
 								numbers={numbers}
 								setNumbers={setNumbers}
 							/>
@@ -185,7 +247,7 @@ export default function App() {
 						</Col>
 						<Col sm={3}>
 							<ButtonStyle
-								number={"."}
+								number={'00'}
 								numbers={numbers}
 								setNumbers={setNumbers}
 							/>
@@ -195,17 +257,24 @@ export default function App() {
 								<View
 									style={{
 										backgroundColor: "#243441",
-										borderRadius: "21px",
+										borderRadius: 21,
 										alignItems: "center",
 										justifyContent: "center",
-										height: "75px",
-										margin: "7px",
-										boxShadow:
-											"rgb(0 0 0 / 7%) 0px 1px 2px, rgb(0 0 0 / 7%) 0px 2px 4px, rgb(0 0 0 / 7%) 0px 4px 8px, rgb(0 0 0 / 7%) 0px 8px 16px, rgb(0 0 0 / 7%) 0px 16px 32px, rgb(0 0 0 / 7%) 0px 32px 64px",
+										height: 75,
+										margin: 7,
+										shadowColor: "#000",
+										shadowOffset: {
+											width: 0,
+											height: 12,
+										},
+										shadowOpacity: 0.58,
+										shadowRadius: 16.0,
+
+										elevation: 24,
 									}}>
 									<Text
 										style={{
-											fontSize: "31px",
+											fontSize: 31,
 											color: "#ED802E",
 										}}>
 										=

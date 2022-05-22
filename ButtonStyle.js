@@ -6,17 +6,24 @@ export default function App({ number, numbers, setNumbers }) {
 			<View
 				style={{
 					backgroundColor: "#243441",
-					borderRadius: "21px",
+					borderRadius: 21,
 					alignItems: "center",
 					justifyContent: "center",
-					height: "75px",
-					margin: "7px",
-					boxShadow:
-						"rgb(0 0 0 / 7%) 0px 1px 2px, rgb(0 0 0 / 7%) 0px 2px 4px, rgb(0 0 0 / 7%) 0px 4px 8px, rgb(0 0 0 / 7%) 0px 8px 16px, rgb(0 0 0 / 7%) 0px 16px 32px, rgb(0 0 0 / 7%) 0px 32px 64px",
+					height: 75,
+					margin: 7,
+					shadowColor: "#000",
+					shadowOffset: {
+						width: 0,
+						height: 12,
+					},
+					shadowOpacity: 0.58,
+					shadowRadius: 16.0,
+
+					elevation: 24,
 				}}>
 				<Text
 					style={{
-						fontSize: "31px",
+						fontSize: 31,
 						color: "white",
 					}}>
 					{number}
