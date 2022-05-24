@@ -5,6 +5,13 @@ import ButtonStyle from "./ButtonStyle";
 
 export default function CalculatorHome() {
 	const [numbers, setNumbers] = useState([]);
+	useEffect(() => {
+		if (numbers.length > 200) {
+			numbers.pop();
+			alert("Max Number Reached");
+		}
+	}, [numbers]);
+
 	console.log(numbers);
 	const [calculation, setCalculation] = useState(0);
 	const [calculated, setCalculated] = useState();
@@ -26,7 +33,7 @@ export default function CalculatorHome() {
 		) {
 			alert("Invalid Format");
 		} else {
-			setCalculated(eval(numbers.join("")));
+			setCalculated(eval(numbers.join("")).toFixed(5));
 		}
 	};
 
@@ -40,7 +47,7 @@ export default function CalculatorHome() {
 				<View
 					style={{
 						padding: 21,
-						height: 200,
+						minHeight: 200,
 					}}>
 					<Text
 						style={{
