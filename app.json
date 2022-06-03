@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sunywebdev.calculatorAppBySuny"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,6 +30,8 @@
     },
     "web": {
       "favicon": "./assets/icon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/sunywebdev/CalculatorAppNative"
   }
 }

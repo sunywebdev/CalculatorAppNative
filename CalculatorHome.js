@@ -23,6 +23,17 @@ export default function CalculatorHome() {
 		const pop = numbers.slice(0, -1);
 		setNumbers(pop);
 	};
+	function isFloat(value) {
+		if (
+			typeof value === "number" &&
+			!Number.isNaN(value) &&
+			!Number.isInteger(value)
+		) {
+			return true;
+		}
+
+		return false;
+	}
 	const calculate = () => {
 		if (
 			numbers.slice(-1).pop() === "+" ||
@@ -33,7 +44,11 @@ export default function CalculatorHome() {
 		) {
 			alert("Invalid Format");
 		} else {
-			setCalculated(eval(numbers.join("")).toFixed(5));
+			if (Number.isInteger(eval(calculation)) === true) {
+				setCalculated(eval(calculation));
+			} else {
+				setCalculated(eval(calculation).toFixed(5));
+			}
 		}
 	};
 
@@ -62,7 +77,7 @@ export default function CalculatorHome() {
 						style={{
 							color: "white",
 							fontWeight: "bold",
-							fontSize: 75,
+							fontSize: 55,
 							textAlign: "right",
 						}}>
 						{calculated}
